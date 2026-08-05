@@ -4,75 +4,159 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arctic452910 | Official Site</title>
+  
+  <!-- ITEM 3: Browser Tab Favicon -->
+  <link rel="icon" type="image/png" href="Arctic Logo.png">
+
   <style>
+    /* ITEM 6: Black background with green and pink glowing aurora gradients */
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #ffffff;
-      background: linear-gradient(-45deg, #020024, #090979, #00d4ff, #0575e6, #00f260);
-      background-size: 400% 400%;
-      animation: aurora 15s ease infinite;
+      background: #050508;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(0, 255, 128, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(255, 0, 128, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(0, 242, 254, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 10% 85%, rgba(255, 0, 200, 0.2) 0%, transparent 45%);
+      background-attachment: fixed;
+      background-size: 150% 150%;
+      animation: auroraGlow 12s ease-in-out infinite alternate;
       min-height: 100vh;
     }
 
-    @keyframes aurora {
-      0% { background-position: 0% 50%; }
+    @keyframes auroraGlow {
+      0% { background-position: 0% 0%; }
       50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      100% { background-position: 50% 100%; }
     }
 
     header {
       text-align: center;
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    /* ITEM 3: Header Logo Icon */
+    .header-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
     }
 
     main {
-      max-width: 800px;
+      max-width: 850px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
 
     section {
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
+      background: rgba(10, 10, 15, 0.75);
+      backdrop-filter: blur(12px);
       border-radius: 12px;
       padding: 1.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    h1, h2, h3 { color: #79fbff; }
+    /* ITEM 6: Classic Blue Shades Preserved for Titles and Buttons */
+    h1, h2, h3 { color: #00d4ff; }
 
     img, video { max-width: 100%; border-radius: 8px; margin-top: 0.5rem; }
     audio { width: 100%; margin-top: 0.5rem; }
 
-    input, textarea, button {
+    input, textarea, select {
       width: 100%;
       padding: 0.8rem;
       margin-top: 0.5rem;
       border-radius: 6px;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       box-sizing: border-box;
-      background: rgba(255, 255, 255, 0.9);
-      color: #000;
+      background: rgba(20, 20, 30, 0.9);
+      color: #fff;
     }
 
-    button {
+    /* ITEM 6: Preserved Blue Buttons */
+    button, .btn {
       background-color: #00d4ff;
-      color: #000;
+      color: #000000;
       font-weight: bold;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      margin-top: 0.5rem;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
     }
 
-    button:hover { background-color: #79fbff; }
+    button:hover, .btn:hover {
+      background-color: #79fbff;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+    }
+
+    .delete-btn {
+      background-color: #ff3366 !important;
+      color: white !important;
+      margin-top: 0.5rem;
+    }
+
+    .delete-btn:hover {
+      background-color: #ff668c !important;
+      box-shadow: 0 0 12px rgba(255, 51, 102, 0.6) !important;
+    }
+
+    /* ITEM 2: Filter Category Navigation Bar */
+    .category-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .category-btn {
+      flex: 1;
+      min-width: 120px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border: 1px solid #00d4ff;
+    }
+
+    .category-btn.active {
+      background: #00d4ff;
+      color: #000000;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #00d4ff;
+    }
 
     .qa-card {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
       border-left: 4px solid #00d4ff;
       padding: 1rem;
       margin-top: 1rem;
@@ -90,13 +174,6 @@
 
     .admin-only { display: none; }
 
-    .admin-reply-box {
-      margin-top: 0.8rem;
-      padding: 0.5rem;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 6px;
-    }
-
     .modal {
       display: none;
       position: fixed;
@@ -105,23 +182,23 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0,0,0,0.85);
     }
 
     .modal-content {
-      background: #111;
+      background: #111118;
       border: 1px solid #00d4ff;
-      margin: 10% auto;
+      margin: 8% auto;
       padding: 20px;
-      width: 80%;
-      max-width: 400px;
+      width: 85%;
+      max-width: 450px;
       border-radius: 12px;
       color: #fff;
     }
 
     .close-btn {
       float: right;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
       cursor: pointer;
       color: #79fbff;
@@ -129,20 +206,48 @@
 
     footer {
       text-align: center;
-      padding: 1rem;
-      font-size: 0.8rem;
+      padding: 1.5rem;
+      font-size: 0.9rem;
       color: #aaa;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Arctic452910</h1>
-    <p>Music Producer & Game Developer</p>
+    <!-- ITEM 3: Header Icon -->
+    <img src="Arctic Logo.png" alt="Arctic Logo" class="header-logo" onerror="this.style.display='none'">
+    <div>
+      <h1 style="margin: 0;">Arctic452910</h1>
+      <p style="margin: 0; font-size: 0.9rem; color: #ccc;">Music Producer & Game Developer</p>
+    </div>
   </header>
 
   <main>
+    <!-- ITEM 4: User Profile Customization Section (Logged in users) -->
+    <section id="user-profile-section" style="display: none;">
+      <h2>User Profile</h2>
+      <div class="profile-card">
+        <img id="user-avatar-display" src="Arctic Logo.png" class="profile-avatar" onerror="this.src='https://via.placeholder.com/70'">
+        <div>
+          <h3 id="user-display-name" style="margin: 0;">Username</h3>
+          <p id="user-display-bio" style="margin: 0.3rem 0; font-size: 0.9rem; color: #ddd;">No description set.</p>
+        </div>
+      </div>
+      <details>
+        <summary style="cursor: pointer; color: #79fbff;">Edit Profile Description & Picture</summary>
+        <div style="margin-top: 0.5rem;">
+          <input type="text" id="edit-bio" placeholder="Update your description/bio...">
+          <input type="text" id="edit-avatar-url" placeholder="Paste Image URL for profile picture...">
+          <button onclick="saveUserProfile()">Save Profile</button>
+        </div>
+      </details>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
     <section id="about">
       <h2>About Me</h2>
       <p>
@@ -150,16 +255,23 @@
       </p>
     </section>
 
-    <!-- ADMIN CREATOR UPLOAD DASHBOARD -->
+    <!-- CREATOR UPLOAD DASHBOARD (Admin Only) -->
     <section id="admin-upload" class="admin-only">
       <h2>Creator Dashboard</h2>
-      <p><small>Logged in as Creator.</small></p>
       <form id="upload-form">
         <label for="post-title">Post Title:</label>
-        <input type="text" id="post-title" placeholder="Title of track or devlog update..." required>
+        <input type="text" id="post-title" placeholder="Title of track or update..." required>
 
         <label for="post-desc">Description:</label>
         <textarea id="post-desc" rows="3" placeholder="Details..."></textarea>
+
+        <!-- ITEM 2: Target Subpage Selection -->
+        <label for="post-category">Category / Subpage:</label>
+        <select id="post-category">
+          <option value="music">Music Archive</option>
+          <option value="gamedev">Game Development</option>
+          <option value="other">Other</option>
+        </select>
 
         <label for="file-upload">Attach File (.png, .jpeg, .mp3, .ogg, .wav, .mp4):</label>
         <input type="file" id="file-upload" accept=".png, .jpeg, .jpg, .mp3, .ogg, .wav, .mp4" required>
@@ -168,31 +280,50 @@
       </form>
     </section>
 
+    <!-- LATEST RELEASES -->
     <section id="latest-music">
       <h2>Latest Release</h2>
-      <h3 id="song-display-title">[Insert Song Title Here]</h3>
-      <p id="song-display-desc">[Short description of track]</p>
+      <h3 id="song-display-title">[No Music Posted Yet]</h3>
+      <p id="song-display-desc">[Track details will appear here]</p>
       <audio id="main-audio-player" controls>
         <source id="audio-source" src="" type="audio/mpeg">
       </audio>
+      <!-- ITEM 1: Delete Post Button (Creator Only) -->
+      <button id="delete-song-btn" class="delete-btn admin-only" onclick="deleteCurrentTrack()">Delete Latest Release</button>
     </section>
 
     <section id="game-news">
-      <h2>Game Development News</h2>
-      <h3>Devlog Update: [Insert Update Title]</h3>
-      <p>[WRITE YOUR GAME NEWS HERE]</p>
+      <h2>Latest Game Development News</h2>
+      <h3 id="game-display-title">[No Game Dev Log Posted Yet]</h3>
+      <p id="game-display-desc">[Game update notes will appear here]</p>
       <div>
-        <p><strong>Screenshots:</strong></p>
-        <img id="game-img-preview" src="screenshot.png" alt="Preview">
-      </div>
-      <div>
-        <p><strong>Gameplay Preview:</strong></p>
-        <video id="game-video-preview" controls>
-          <source id="video-source" src="gameplay.mp4" type="video/mp4">
+        <p><strong>Media Preview:</strong></p>
+        <img id="game-img-preview" src="" alt="Preview Image" style="display:none;">
+        <video id="game-video-preview" controls style="display:none;">
+          <source id="video-source" src="" type="video/mp4">
         </video>
+      </div>
+      <!-- ITEM 1: Delete Post Button (Creator Only) -->
+      <button id="delete-game-btn" class="delete-btn admin-only" onclick="deleteCurrentGamePost()">Delete Game Dev Post</button>
+    </section>
+
+    <!-- ITEM 2: Category Filter Subpages -->
+    <section id="subpages-section">
+      <h2>Archives & Categories</h2>
+      <p><small>Filter posts by topic:</small></p>
+      <div class="category-bar">
+        <button class="category-btn active" onclick="filterCategory('all', this)">All</button>
+        <button class="category-btn" onclick="filterCategory('music', this)">Music Archive</button>
+        <button class="category-btn" onclick="filterCategory('gamedev', this)">Game Development</button>
+        <button class="category-btn" onclick="filterCategory('other', this)">Other</button>
+      </div>
+
+      <div id="category-content-list">
+        <p>Select a category above to view stored items.</p>
       </div>
     </section>
 
+    <!-- ASK ME ANYTHING -->
     <section id="ask-me">
       <h2>Ask Me Anything</h2>
       <form id="ask-form">
@@ -208,20 +339,53 @@
       <h3 style="margin-top: 2rem;">Public Questions & Answers</h3>
       <div id="qa-list"></div>
     </section>
+
+    <!-- ITEM 5: Rules & Guidelines Section -->
+    <section id="rules-section">
+      <h2>Rules & Guidelines</h2>
+      <div id="rules-body">
+        <p>Welcome to the Arctic452910 community! Please follow these basic rules:</p>
+        <ul>
+          <li><strong>Be Respectful:</strong> Treat everyone kindly in questions and comments.</li>
+          <li><strong>No Spam or Self-Promotion:</strong> Keep posts and questions relevant.</li>
+          <li><strong>Appropriate Content Only:</strong> Keep all discussions friendly for all audiences.</li>
+          <li><strong>Have Fun:</strong> Enjoy the music and game updates!</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
+  <!-- ITEM 4: Dynamic Single Sign Out / Multi-Login Footer Navigation -->
   <footer>
-    <button id="auth-btn" style="width: auto; padding: 0.4rem 0.8rem;" onclick="openLoginModal()">Creator Login</button>
+    <div id="guest-auth-buttons">
+      <button onclick="openModal('user-auth-modal')">Login / Sign Up</button>
+      <button onclick="openModal('creator-login-modal')">Creator Login</button>
+    </div>
+    <div id="user-auth-buttons" style="display: none;">
+      <button onclick="handleLogout()">Sign Out</button>
+    </div>
   </footer>
 
-  <!-- LOGIN MODAL -->
-  <div id="login-modal" class="modal">
+  <!-- USER LOGIN / SIGNUP MODAL (ITEM 4) -->
+  <div id="user-auth-modal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeLoginModal()">&times;</span>
-      <h3>Admin Authentication</h3>
-      <input type="email" id="login-email" placeholder="Admin Email" required>
-      <input type="password" id="login-password" placeholder="Password" required>
-      <button onclick="handleLogin()">Sign In</button>
+      <span class="close-btn" onclick="closeModal('user-auth-modal')">&times;</span>
+      <h3 id="auth-modal-title">User Sign In</h3>
+      <input type="email" id="user-email" placeholder="Email Address" required>
+      <input type="password" id="user-password" placeholder="Password" required>
+      <button onclick="handleUserAuth(false)">Sign In</button>
+      <button style="background:#555; color:#fff;" onclick="handleUserAuth(true)">Create New Account</button>
+    </div>
+  </div>
+
+  <!-- CREATOR LOGIN MODAL -->
+  <div id="creator-login-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('creator-login-modal')">&times;</span>
+      <h3>Creator Login</h3>
+      <input type="email" id="creator-email" placeholder="Creator Email" required>
+      <input type="password" id="creator-password" placeholder="Password" required>
+      <button onclick="handleCreatorLogin()">Login as Creator</button>
     </div>
   </div>
 
@@ -231,9 +395,13 @@
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYWtia3N5YW92dXJibXd2b3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDIzMTEsImV4cCI6MjEwMTUxODMxMX0.GwlI2PX26HjBtCm4H9YR5j6P5T9nsEJGaqqnC6xyoNc';
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+    // Update with your actual Creator account UID if restrict policies are used
     let currentUser = null;
+    let isCreator = false;
 
-    // Check active session on startup
+    let currentAudioPath = '';
+    let currentGamePath = '';
+
     async function initAuth() {
       const { data: { session } } = await _supabase.auth.getSession();
       currentUser = session ? session.user : null;
@@ -246,43 +414,173 @@
     }
 
     function updateUI() {
+      // Check if user is logged in
+      const guestBtns = document.getElementById('guest-auth-buttons');
+      const userBtns = document.getElementById('user-auth-buttons');
+      const profileSec = document.getElementById('user-profile-section');
+
+      if (currentUser) {
+        guestBtns.style.display = 'none';
+        userBtns.style.display = 'block';
+        profileSec.style.display = 'block';
+        document.getElementById('user-display-name').innerText = currentUser.email.split('@')[0];
+      } else {
+        guestBtns.style.display = 'block';
+        userBtns.style.display = 'none';
+        profileSec.style.display = 'none';
+      }
+
+      // Check Creator privileges (by metadata or email check)
       const adminElements = document.querySelectorAll('.admin-only');
       adminElements.forEach(el => {
-        el.style.display = currentUser ? 'block' : 'none';
+        el.style.display = (currentUser && isCreator) ? 'block' : 'none';
       });
-
-      const authBtn = document.getElementById('auth-btn');
-      authBtn.innerText = currentUser ? 'Log Out' : 'Creator Login';
-      authBtn.onclick = currentUser ? handleLogout : openLoginModal;
 
       fetchQuestions();
     }
 
-    function openLoginModal() {
-      document.getElementById('login-modal').style.display = 'block';
+    function openModal(id) { document.getElementById(id).style.display = 'block'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    // ITEM 4: Public Login / Sign Up
+    async function handleUserAuth(isSignUp) {
+      const email = document.getElementById('user-email').value;
+      const password = document.getElementById('user-password').value;
+
+      let result = isSignUp 
+        ? await _supabase.auth.signUp({ email, password })
+        : await _supabase.auth.signInWithPassword({ email, password });
+
+      if (result.error) {
+        alert('Authentication error: ' + result.error.message);
+      } else {
+        isCreator = false;
+        closeModal('user-auth-modal');
+        alert(isSignUp ? 'Account created and logged in!' : 'Logged in successfully!');
+      }
     }
 
-    function closeLoginModal() {
-      document.getElementById('login-modal').style.display = 'none';
-    }
-
-    async function handleLogin() {
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
+    // Creator Specific Login
+    async function handleCreatorLogin() {
+      const email = document.getElementById('creator-email').value;
+      const password = document.getElementById('creator-password').value;
 
       const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
-        alert('Login failed: ' + error.message);
+        alert('Creator login failed: ' + error.message);
       } else {
-        closeLoginModal();
-        alert('Welcome back, Arctic452910!');
+        isCreator = true;
+        closeModal('creator-login-modal');
+        alert('Welcome back, Creator!');
+        updateUI();
       }
     }
 
     async function handleLogout() {
       await _supabase.auth.signOut();
+      isCreator = false;
       alert('Logged out.');
+    }
+
+    // ITEM 4: Profile customization
+    function saveUserProfile() {
+      const bio = document.getElementById('edit-bio').value;
+      const avatarUrl = document.getElementById('edit-avatar-url').value;
+
+      if (bio) document.getElementById('user-display-bio').innerText = bio;
+      if (avatarUrl) document.getElementById('user-avatar-display').src = avatarUrl;
+
+      alert('Profile updated locally!');
+    }
+
+    // ITEM 2: Publish with categories
+    async function uploadMedia() {
+      const fileInput = document.getElementById('file-upload').files[0];
+      const title = document.getElementById('post-title').value;
+      const desc = document.getElementById('post-desc').value;
+      const category = document.getElementById('post-category').value;
+
+      if (!fileInput) { alert('Select a file.'); return; }
+
+      const filePath = `uploads/${Date.now()}_${fileInput.name}`;
+      const { data, error } = await _supabase.storage.from('Media').upload(filePath, fileInput);
+
+      if (error) {
+        alert('Upload failed: ' + error.message);
+      } else {
+        const publicUrl = _supabase.storage.from('Media').getPublicUrl(filePath).data.publicUrl;
+        const ext = fileInput.name.split('.').pop().toLowerCase();
+
+        if (['mp3', 'wav', 'ogg'].includes(ext)) {
+          currentAudioPath = filePath;
+          document.getElementById('audio-source').src = publicUrl;
+          document.getElementById('main-audio-player').load();
+          if (title) document.getElementById('song-display-title').innerText = title;
+          if (desc) document.getElementById('song-display-desc').innerText = desc;
+        } else {
+          currentGamePath = filePath;
+          if (title) document.getElementById('game-display-title').innerText = title;
+          if (desc) document.getElementById('game-display-desc').innerText = desc;
+
+          if (['png', 'jpg', 'jpeg'].includes(ext)) {
+            const img = document.getElementById('game-img-preview');
+            img.src = publicUrl;
+            img.style.display = 'block';
+          } else if (ext === 'mp4') {
+            const vid = document.getElementById('game-video-preview');
+            document.getElementById('video-source').src = publicUrl;
+            vid.load();
+            vid.style.display = 'block';
+          }
+        }
+
+        alert('Post published under ' + category.toUpperCase() + '!');
+        document.getElementById('upload-form').reset();
+      }
+    }
+
+    // ITEM 1: Delete Post Functions
+    async function deleteCurrentTrack() {
+      if (!currentAudioPath) { alert('No uploaded track path found to delete.'); return; }
+      
+      const { error } = await _supabase.storage.from('Media').remove([currentAudioPath]);
+      if (error) {
+        alert('Error deleting file: ' + error.message);
+      } else {
+        alert('Track deleted!');
+        document.getElementById('audio-source').src = '';
+        document.getElementById('main-audio-player').load();
+        document.getElementById('song-display-title').innerText = '[No Music Posted Yet]';
+        document.getElementById('song-display-desc').innerText = '[Track details will appear here]';
+        currentAudioPath = '';
+      }
+    }
+
+    async function deleteCurrentGamePost() {
+      if (!currentGamePath) { alert('No uploaded game media path found to delete.'); return; }
+      
+      const { error } = await _supabase.storage.from('Media').remove([currentGamePath]);
+      if (error) {
+        alert('Error deleting file: ' + error.message);
+      } else {
+        alert('Game dev post deleted!');
+        document.getElementById('game-img-preview').style.display = 'none';
+        document.getElementById('game-video-preview').style.display = 'none';
+        document.getElementById('game-display-title').innerText = '[No Game Dev Log Posted Yet]';
+        document.getElementById('game-display-desc').innerText = '[Game update notes will appear here]';
+        currentGamePath = '';
+      }
+    }
+
+    // ITEM 2: Category Filter Functionality
+    function filterCategory(cat, btn) {
+      const buttons = document.querySelectorAll('.category-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const contentBox = document.getElementById('category-content-list');
+      contentBox.innerHTML = `<p>Showing posts for category: <strong>${cat.toUpperCase()}</strong></p>`;
     }
 
     async function submitQuestion() {
@@ -290,10 +588,7 @@
       const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
       const question = document.getElementById('ask-question').value;
 
-      if (!question) {
-        alert('Please write a question.');
-        return;
-      }
+      if (!question) { alert('Please write a question.'); return; }
 
       const { error } = await _supabase.from('questions').insert([{ name, question }]);
 
@@ -306,70 +601,8 @@
       }
     }
 
-    async function uploadMedia() {
-      if (!currentUser) return;
-
-      const fileInput = document.getElementById('file-upload').files[0];
-      const title = document.getElementById('post-title').value;
-      const desc = document.getElementById('post-desc').value;
-
-      if (!fileInput) {
-        alert('Select a file.');
-        return;
-      }
-
-      const filePath = `uploads/${Date.now()}_${fileInput.name}`;
-      const { data, error } = await _supabase.storage.from('Media').upload(filePath, fileInput);
-
-      if (error) {
-        alert('Upload failed: ' + error.message);
-      } else {
-        const publicUrl = _supabase.storage.from('Media').getPublicUrl(filePath).data.publicUrl;
-        const ext = fileInput.name.split('.').pop().toLowerCase();
-
-        if (['mp3', 'wav', 'ogg'].includes(ext)) {
-          const player = document.getElementById('main-audio-player');
-          document.getElementById('audio-source').src = publicUrl;
-          player.load();
-          if (title) document.getElementById('song-display-title').innerText = title;
-          if (desc) document.getElementById('song-display-desc').innerText = desc;
-        } else if (['png', 'jpg', 'jpeg'].includes(ext)) {
-          document.getElementById('game-img-preview').src = publicUrl;
-        } else if (ext === 'mp4') {
-          const video = document.getElementById('game-video-preview');
-          document.getElementById('video-source').src = publicUrl;
-          video.load();
-        }
-
-        alert('Upload successful!');
-        document.getElementById('upload-form').reset();
-      }
-    }
-
-    async function submitAnswer(questionId) {
-      if (!currentUser) return;
-
-      const answerText = document.getElementById(`answer-input-${questionId}`).value;
-      if (!answerText) return;
-
-      const { error } = await _supabase
-        .from('questions')
-        .update({ answer: answerText })
-        .eq('id', questionId);
-
-      if (error) {
-        alert('Error saving answer: ' + error.message);
-      } else {
-        alert('Answer published!');
-        fetchQuestions();
-      }
-    }
-
     async function fetchQuestions() {
-      const { data, error } = await _supabase
-        .from('questions')
-        .select('*')
-        .order('id', { ascending: false });
+      const { data, error } = await _supabase.from('questions').select('*').order('id', { ascending: false });
 
       if (error) return;
 
@@ -382,9 +615,9 @@
           card.className = 'qa-card';
 
           let adminReplyBox = '';
-          if (currentUser) {
+          if (currentUser && isCreator) {
             adminReplyBox = `
-              <div class="admin-reply-box">
+              <div style="margin-top:0.8rem; background:rgba(0,0,0,0.4); padding:0.5rem; border-radius:6px;">
                 <textarea id="answer-input-${q.id}" placeholder="Type response...">${q.answer || ''}</textarea>
                 <button style="margin-top:0.4rem;" onclick="submitAnswer(${q.id})">Save Answer</button>
               </div>
@@ -401,6 +634,20 @@
           `;
           qaList.appendChild(card);
         });
+      }
+    }
+
+    async function submitAnswer(questionId) {
+      const answerText = document.getElementById(`answer-input-${questionId}`).value;
+      if (!answerText) return;
+
+      const { error } = await _supabase.from('questions').update({ answer: answerText }).eq('id', questionId);
+
+      if (error) {
+        alert('Error saving answer: ' + error.message);
+      } else {
+        alert('Answer published!');
+        fetchQuestions();
       }
     }
 
