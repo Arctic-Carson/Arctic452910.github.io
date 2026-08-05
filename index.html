@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arctic452910 | Official Site</title>
+  <style>
+    /* Animated Aurora Gradient Background */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ffffff;
+      background: linear-gradient(-45deg, #020024, #090979, #00d4ff, #0575e6, #00f260);
+      background-size: 400% 400%;
+      animation: aurora 15s ease infinite;
+      min-height: 100vh;
+    }
+
+    @keyframes aurora {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    h1, h2, h3 {
+      color: #79fbff;
+    }
+
+    img, video {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    input, textarea, button, select {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      border: none;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+    }
+
+    button {
+      background-color: #00d4ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #79fbff;
+    }
+
+    .qa-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-left: 4px solid #00d4ff;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .qa-author {
+      font-weight: bold;
+      color: #79fbff;
+    }
+
+    .qa-answer {
+      margin-top: 0.5rem;
+      padding-left: 1rem;
+      border-left: 2px solid #00f260;
+      color: #e0e0e0;
+    }
+
+    /* Modal Styling for Guidelines */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      background: #111;
+      border: 1px solid #00d4ff;
+      margin: 15% auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 12px;
+      color: #fff;
+    }
+
+    .close-btn {
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #79fbff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Arctic452910</h1>
+    <p>Music Producer & Game Developer</p>
+  </header>
+
+  <main>
+    <!-- ABOUT ME SECTION -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I am Arctic452910, or ArcticMusicProductions. I am a type 1 diabetic living in Alabama. I work primarily on Gamejolt. I LOVE retro music and love to make it, along with music that is a hybrid of both. I love the works of Toby Fox in UNDERTALE and DELTARUNE, and also like music from EarthBound, EarthBound Beginnings, Ducktales (NES), Mario, and my own games of course! If you want to learn more, I've got an ask box here on this site, as well as comment section!
+      </p>
+    </section>
+
+    <!-- ADMIN CREATOR UPLOAD DASHBOARD -->
+    <section id="admin-upload">
+      <h2>Creator Post & Upload Dashboard</h2>
+      <p><small>Use this section to add new media and posts directly from your site.</small></p>
+      <form id="upload-form">
+        <label for="post-title">Post Title:</label>
+        <input type="text" id="post-title" placeholder="Title of your song or devlog update..." required>
+
+        <label for="post-desc">Description:</label>
+        <textarea id="post-desc" rows="3" placeholder="Details about the track or update..."></textarea>
+
+        <label for="file-upload">Attach File (.png, .jpeg, .mp3, .ogg, .wav, .mp4):</label>
+        <input type="file" id="file-upload" accept=".png, .jpeg, .jpg, .mp3, .ogg, .wav, .mp4" required>
+
+        <button type="button" onclick="showGuidelines('upload')">Publish Post</button>
+      </form>
+    </section>
+
+    <!-- LATEST SONG SECTION -->
+    <section id="latest-music">
+      <h2>Latest Release</h2>
+      <h3>[Insert Song Title Here]</h3>
+      <p>[Short description of the track, key, BPM, or tools used.]</p>
+      
+      <audio controls>
+        <source src="your-song.mp3" type="audio/mpeg">
+        <source src="your-song.ogg" type="audio/ogg">
+        <source src="your-song.wav" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+    </section>
+
+    <!-- GAME DEVLOG SECTION -->
+    <section id="game-news">
+      <h2>Game Development News</h2>
+      <h3>Devlog Update: [Insert Update Title]</h3>
+      <p>[WRITE YOUR GAME NEWS HERE: Detail your latest features, mechanics, or milestones.]</p>
+      
+      <div>
+        <p><strong>Screenshots:</strong></p>
+        <img src="screenshot.png" alt="Game Screenshot Preview">
+      </div>
+
+      <div>
+        <p><strong>Gameplay Preview:</strong></p>
+        <video controls>
+          <source src="gameplay.mp4" type="video/mp4">
+          Your browser does not support the video element.
+        </video>
+      </div>
+    </section>
+
+    <!-- LOCAL PUBLIC ASK BOX -->
+    <section id="ask-me">
+      <h2>Ask Me Anything</h2>
+      <form id="ask-form">
+        <label for="ask-name">Your Name (Leave blank for ANONYMOUS):</label>
+        <input type="text" id="ask-name" placeholder="ANONYMOUS">
+        
+        <label for="ask-question">Your Question:</label>
+        <textarea id="ask-question" rows="3" required placeholder="Ask me about my music, games, or projects..."></textarea>
+        
+        <button type="button" onclick="showGuidelines('ask')">Submit Question</button>
+      </form>
+
+      <!-- PUBLIC QUESTIONS AND ANSWERS DISPLAY -->
+      <h3 style="margin-top: 2rem;">Public Questions & Answers</h3>
+      <div id="qa-list">
+        <!-- Example Answered Question -->
+        <div class="qa-card">
+          <p class="qa-author">Submitted by: RetroFan99</p>
+          <p><strong>Q:</strong> What software do you use to make your retro chiptune music?</p>
+          <div class="qa-answer">
+            <p><strong>Arctic452910:</strong> I use FL Studio Mobile along with VSTs that emulate classic sound chips like the NES Ricoh 2A03 and Game Boy sound hardware!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- POSTING GUIDELINES MODAL -->
+  <div id="guidelines-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeGuidelines()">&times;</span>
+      <h3>Posting Guidelines</h3>
+      <ul>
+        <li>Be respectful and constructive in questions and comments.</li>
+        <li>No spam, self-promotion, or illegal content.</li>
+        <li>Ensure uploaded files are in .png, .jpeg, .mp3, .ogg, .wav, or .mp4 format.</li>
+      </ul>
+      <button onclick="confirmSubmission()">I Agree & Submit</button>
+    </div>
+  </div>
+
+  <script>
+    let activeAction = '';
+
+    function showGuidelines(actionType) {
+      activeAction = actionType;
+      document.getElementById('guidelines-modal').style.display = 'block';
+    }
+
+    function closeGuidelines() {
+      document.getElementById('guidelines-modal').style.display = 'none';
+    }
+
+    function confirmSubmission() {
+      closeGuidelines();
+      if (activeAction === 'ask') {
+        const nameInput = document.getElementById('ask-name').value.trim();
+        const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
+        const question = document.getElementById('ask-question').value;
+
+        if (!question) return;
+
+        // Visual append preview (Requires Supabase integration for persistent storage)
+        const qaList = document.getElementById('qa-list');
+        const newQa = document.createElement('div');
+        newQa.className = 'qa-card';
+        newQa.innerHTML = `<p class="qa-author">Submitted by: ${name}</p>
+                           <p><strong>Q:</strong> ${question}</p>
+                           <p><em>(Awaiting response from Arctic452910)</em></p>`;
+        qaList.prepend(newQa);
+        document.getElementById('ask-form').reset();
+      } else if (activeAction === 'upload') {
+        alert('File submission initiated. Integrate a backend like Firebase Storage to persist files.');
+      }
+    }
+  </script>
+
+</body>
+</html>
