@@ -245,41 +245,55 @@
       <button onclick="confirmSubmission()">I Agree & Submit</button>
     </div>
   </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://egakbksyaovurbmwvopg.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYWtia3N5YW92dXJibXd2b3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDIzMTEsImV4cCI6MjEwMTUxODMxMX0.GwlI2PX26HjBtCm4H9YR5j6P5T9nsEJGaqqnC6xyoNc';
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
 
   <script>
-    let activeAction = '';
+async function confirmSubmission() {
+  closeGuidelines();
 
-    function showGuidelines(actionType) {
-      activeAction = actionType;
-      document.getElementById('guidelines-modal').style.display = 'block';
+  if (activeAction === 'ask') {
+    const nameInput = document.getElementById('ask-name').value.trim();
+    const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
+    const question = document.getElementById('ask-question').value;
+
+    if (!question) return;
+
+    // Save to Supabase Database
+    const { error } = await supabase
+      .from('questions')
+      .insert([{ name: name, question: question }]);
+
+    if (error) {
+      alert('Error submitting question: ' + error.message);
+    } else {
+      alert('Question submitted successfully!');
+      location.reload(); // Refresh to show new question
     }
+  } 
+  else if (activeAction === 'upload') {
+    const fileInput = document.getElementById('file-upload').files[0];
+    if (!fileInput) return;
 
-    function closeGuidelines() {
-      document.getElementById('guidelines-modal').style.display = 'none';
+    // Upload file to Supabase Storage
+    const filePath = `uploads/${Date.now()}_${fileInput.name}`;
+    const { data, error } = await supabase.storage
+      .from('media')
+      .upload(filePath, fileInput);
+
+    if (error) {
+      alert('Upload failed: ' + error.message);
+    } else {
+      const publicUrl = supabase.storage.from('media').getPublicUrl(filePath).data.publicUrl;
+      alert('File uploaded successfully! File URL: ' + publicUrl);
     }
-
-    function confirmSubmission() {
-      closeGuidelines();
-      if (activeAction === 'ask') {
-        const nameInput = document.getElementById('ask-name').value.trim();
-        const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
-        const question = document.getElementById('ask-question').value;
-
-        if (!question) return;
-
-        // Visual append preview (Requires Supabase integration for persistent storage)
-        const qaList = document.getElementById('qa-list');
-        const newQa = document.createElement('div');
-        newQa.className = 'qa-card';
-        newQa.innerHTML = `<p class="qa-author">Submitted by: ${name}</p>
-                           <p><strong>Q:</strong> ${question}</p>
-                           <p><em>(Awaiting response from Arctic452910)</em></p>`;
-        qaList.prepend(newQa);
-        document.getElementById('ask-form').reset();
-      } else if (activeAction === 'upload') {
-        alert('File submission initiated. Integrate a backend like Firebase Storage to persist files.');
-      }
-    }
+  }
+}
   </script>
 
 </body>
