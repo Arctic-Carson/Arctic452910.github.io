@@ -319,12 +319,12 @@
       }
 
       const filePath = `uploads/${Date.now()}_${fileInput.name}`;
-      const { data, error } = await _supabase.storage.from('media').upload(filePath, fileInput);
+      const { data, error } = await _supabase.storage.from('Media').upload(filePath, fileInput);
 
       if (error) {
         alert('Upload failed: ' + error.message);
       } else {
-        const publicUrl = _supabase.storage.from('media').getPublicUrl(filePath).data.publicUrl;
+        const publicUrl = _supabase.storage.from('Media').getPublicUrl(filePath).data.publicUrl;
         const ext = fileInput.name.split('.').pop().toLowerCase();
 
         if (['mp3', 'wav', 'ogg'].includes(ext)) {
