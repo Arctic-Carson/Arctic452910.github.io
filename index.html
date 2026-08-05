@@ -173,13 +173,11 @@
     <!-- LATEST SONG SECTION -->
     <section id="latest-music">
       <h2>Latest Release</h2>
-      <h3>[Insert Song Title Here]</h3>
-      <p>[Short description of the track, key, BPM, or tools used.]</p>
+      <h3 id="song-display-title">[Insert Song Title Here]</h3>
+      <p id="song-display-desc">[Short description of the track, key, BPM, or tools used.]</p>
       
-      <audio controls>
-        <source src="your-song.mp3" type="audio/mpeg">
-        <source src="your-song.ogg" type="audio/ogg">
-        <source src="your-song.wav" type="audio/wav">
+      <audio id="main-audio-player" controls>
+        <source id="audio-source" src="" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </section>
@@ -192,13 +190,13 @@
       
       <div>
         <p><strong>Screenshots:</strong></p>
-        <img src="screenshot.png" alt="Game Screenshot Preview">
+        <img id="game-img-preview" src="screenshot.png" alt="Game Screenshot Preview">
       </div>
 
       <div>
         <p><strong>Gameplay Preview:</strong></p>
-        <video controls>
-          <source src="gameplay.mp4" type="video/mp4">
+        <video id="game-video-preview" controls>
+          <source id="video-source" src="gameplay.mp4" type="video/mp4">
           Your browser does not support the video element.
         </video>
       </div>
@@ -220,14 +218,7 @@
       <!-- PUBLIC QUESTIONS AND ANSWERS DISPLAY -->
       <h3 style="margin-top: 2rem;">Public Questions & Answers</h3>
       <div id="qa-list">
-        <!-- Example Answered Question -->
-        <div class="qa-card">
-          <p class="qa-author">Submitted by: RetroFan99</p>
-          <p><strong>Q:</strong> What software do you use to make your retro chiptune music?</p>
-          <div class="qa-answer">
-            <p><strong>Arctic452910:</strong> I use FL Studio Mobile along with VSTs that emulate classic sound chips like the NES Ricoh 2A03 and Game Boy sound hardware!</p>
-          </div>
-        </div>
+        <!-- Live questions load here -->
       </div>
     </section>
   </main>
@@ -246,54 +237,119 @@
     </div>
   </div>
   
+  <!-- Supabase Library Initialization -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const SUPABASE_URL = 'https://egakbksyaovurbmwvopg.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYWtia3N5YW92dXJibXd2b3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDIzMTEsImV4cCI6MjEwMTUxODMxMX0.GwlI2PX26HjBtCm4H9YR5j6P5T9nsEJGaqqnC6xyoNc';
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-</script>
-
   <script>
-async function confirmSubmission() {
-  closeGuidelines();
+    const SUPABASE_URL = 'https://egakbksyaovurbmwvopg.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYWtia3N5YW92dXJibXd2b3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDIzMTEsImV4cCI6MjEwMTUxODMxMX0.GwlI2PX26HjBtCm4H9YR5j6P5T9nsEJGaqqnC6xyoNc';
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  if (activeAction === 'ask') {
-    const nameInput = document.getElementById('ask-name').value.trim();
-    const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
-    const question = document.getElementById('ask-question').value;
+    let activeAction = '';
 
-    if (!question) return;
-
-    // Save to Supabase Database
-    const { error } = await supabase
-      .from('questions')
-      .insert([{ name: name, question: question }]);
-
-    if (error) {
-      alert('Error submitting question: ' + error.message);
-    } else {
-      alert('Question submitted successfully!');
-      location.reload(); // Refresh to show new question
+    function showGuidelines(actionType) {
+      activeAction = actionType;
+      document.getElementById('guidelines-modal').style.display = 'block';
     }
-  } 
-  else if (activeAction === 'upload') {
-    const fileInput = document.getElementById('file-upload').files[0];
-    if (!fileInput) return;
 
-    // Upload file to Supabase Storage
-    const filePath = `uploads/${Date.now()}_${fileInput.name}`;
-    const { data, error } = await supabase.storage
-      .from('media')
-      .upload(filePath, fileInput);
-
-    if (error) {
-      alert('Upload failed: ' + error.message);
-    } else {
-      const publicUrl = supabase.storage.from('media').getPublicUrl(filePath).data.publicUrl;
-      alert('File uploaded successfully! File URL: ' + publicUrl);
+    function closeGuidelines() {
+      document.getElementById('guidelines-modal').style.display = 'none';
     }
-  }
-}
+
+    async function confirmSubmission() {
+      closeGuidelines();
+
+      if (activeAction === 'ask') {
+        const nameInput = document.getElementById('ask-name').value.trim();
+        const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
+        const question = document.getElementById('ask-question').value;
+
+        if (!question) return;
+
+        const { error } = await _supabase
+          .from('questions')
+          .insert([{ name: name, question: question }]);
+
+        if (error) {
+          alert('Error submitting question: ' + error.message);
+        } else {
+          alert('Question submitted successfully!');
+          fetchQuestions();
+        }
+      } 
+      else if (activeAction === 'upload') {
+        const fileInput = document.getElementById('file-upload').files[0];
+        const title = document.getElementById('post-title').value;
+        const desc = document.getElementById('post-desc').value;
+
+        if (!fileInput) {
+          alert('Please select a file first.');
+          return;
+        }
+
+        const filePath = `uploads/${Date.now()}_${fileInput.name}`;
+        
+        // Upload file to Supabase Storage
+        const { data, error } = await _supabase.storage
+          .from('media')
+          .upload(filePath, fileInput);
+
+        if (error) {
+          alert('Upload failed: ' + error.message + '\nCheck if your bucket is public and allows uploads.');
+        } else {
+          const publicUrl = _supabase.storage.from('media').getPublicUrl(filePath).data.publicUrl;
+          
+          // Check file type to assign to correct player
+          const ext = fileInput.name.split('.').pop().toLowerCase();
+          
+          if (['mp3', 'wav', 'ogg'].includes(ext)) {
+            const player = document.getElementById('main-audio-player');
+            const source = document.getElementById('audio-source');
+            source.src = publicUrl;
+            player.load();
+            if (title) document.getElementById('song-display-title').innerText = title;
+            if (desc) document.getElementById('song-display-desc').innerText = desc;
+          } else if (['png', 'jpg', 'jpeg'].includes(ext)) {
+            document.getElementById('game-img-preview').src = publicUrl;
+          } else if (ext === 'mp4') {
+            const video = document.getElementById('game-video-preview');
+            const source = document.getElementById('video-source');
+            source.src = publicUrl;
+            video.load();
+          }
+
+          alert('File uploaded successfully! Updated on page.');
+        }
+      }
+    }
+
+    // Function to load questions from database
+    async function fetchQuestions() {
+      const { data, error } = await _supabase
+        .from('questions')
+        .select('*')
+        .order('id', { ascending: false });
+
+      if (error) return;
+
+      const qaList = document.getElementById('qa-list');
+      qaList.innerHTML = '';
+
+      data.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'qa-card';
+        card.innerHTML = `
+          <p class="qa-author">Submitted by: ${q.name || 'ANONYMOUS'}</p>
+          <p><strong>Q:</strong> ${q.question}</p>
+          <div class="qa-answer">
+            <p><strong>Arctic452910:</strong> ${q.answer || '<em>(Awaiting response)</em>'}</p>
+          </div>
+        `;
+        qaList.appendChild(card);
+      });
+    }
+
+    // Load existing questions when page opens
+    window.onload = fetchQuestions;
   </script>
 
 </body>
