@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arctic452910 | Official Site</title>
   <style>
-    /* Animated Aurora Gradient Background */
     body {
       margin: 0;
       padding: 0;
@@ -46,22 +45,12 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    h1, h2, h3 {
-      color: #79fbff;
-    }
+    h1, h2, h3 { color: #79fbff; }
 
-    img, video {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-top: 0.5rem;
-    }
+    img, video { max-width: 100%; border-radius: 8px; margin-top: 0.5rem; }
+    audio { width: 100%; margin-top: 0.5rem; }
 
-    audio {
-      width: 100%;
-      margin-top: 0.5rem;
-    }
-
-    input, textarea, button, select {
+    input, textarea, button {
       width: 100%;
       padding: 0.8rem;
       margin-top: 0.5rem;
@@ -80,9 +69,7 @@
       transition: background 0.3s;
     }
 
-    button:hover {
-      background-color: #79fbff;
-    }
+    button:hover { background-color: #79fbff; }
 
     .qa-card {
       background: rgba(255, 255, 255, 0.1);
@@ -92,10 +79,7 @@
       border-radius: 0 8px 8px 0;
     }
 
-    .qa-author {
-      font-weight: bold;
-      color: #79fbff;
-    }
+    .qa-author { font-weight: bold; color: #79fbff; }
 
     .qa-answer {
       margin-top: 0.5rem;
@@ -104,7 +88,15 @@
       color: #e0e0e0;
     }
 
-    /* Modal Styling for Guidelines */
+    .admin-only { display: none; }
+
+    .admin-reply-box {
+      margin-top: 0.8rem;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 6px;
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -119,10 +111,10 @@
     .modal-content {
       background: #111;
       border: 1px solid #00d4ff;
-      margin: 15% auto;
+      margin: 10% auto;
       padding: 20px;
       width: 80%;
-      max-width: 500px;
+      max-width: 400px;
       border-radius: 12px;
       color: #fff;
     }
@@ -134,6 +126,13 @@
       cursor: pointer;
       color: #79fbff;
     }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -144,65 +143,56 @@
   </header>
 
   <main>
-    <!-- ABOUT ME SECTION -->
     <section id="about">
       <h2>About Me</h2>
       <p>
-        I am Arctic452910, or ArcticMusicProductions. I am a type 1 diabetic living in Alabama. I work primarily on Gamejolt. I LOVE retro music and love to make it, along with music that is a hybrid of both. I love the works of Toby Fox in UNDERTALE and DELTARUNE, and also like music from EarthBound, EarthBound Beginnings, Ducktales (NES), Mario, and my own games of course! If you want to learn more, I've got an ask box here on this site, as well as comment section!
+        I am Arctic452910, or ArcticMusicProductions. I am a type 1 diabetic living in Alabama. I work primarily on Gamejolt. I LOVE retro music and love to make it, along with music that is a hybrid of both. I love the works of Toby Fox in UNDERTALE and DELTARUNE, and also like music from EarthBound, EarthBound Beginnings, Ducktales (NES), Mario, and my own games of course! If you want to learn more, I've got an ask box here on this site!
       </p>
     </section>
 
     <!-- ADMIN CREATOR UPLOAD DASHBOARD -->
-    <section id="admin-upload">
-      <h2>Creator Post & Upload Dashboard</h2>
-      <p><small>Use this section to add new media and posts directly from your site.</small></p>
+    <section id="admin-upload" class="admin-only">
+      <h2>Creator Dashboard</h2>
+      <p><small>Logged in as Creator.</small></p>
       <form id="upload-form">
         <label for="post-title">Post Title:</label>
-        <input type="text" id="post-title" placeholder="Title of your song or devlog update..." required>
+        <input type="text" id="post-title" placeholder="Title of track or devlog update..." required>
 
         <label for="post-desc">Description:</label>
-        <textarea id="post-desc" rows="3" placeholder="Details about the track or update..."></textarea>
+        <textarea id="post-desc" rows="3" placeholder="Details..."></textarea>
 
         <label for="file-upload">Attach File (.png, .jpeg, .mp3, .ogg, .wav, .mp4):</label>
         <input type="file" id="file-upload" accept=".png, .jpeg, .jpg, .mp3, .ogg, .wav, .mp4" required>
 
-        <button type="button" onclick="showGuidelines('upload')">Publish Post</button>
+        <button type="button" onclick="uploadMedia()">Publish Post</button>
       </form>
     </section>
 
-    <!-- LATEST SONG SECTION -->
     <section id="latest-music">
       <h2>Latest Release</h2>
       <h3 id="song-display-title">[Insert Song Title Here]</h3>
-      <p id="song-display-desc">[Short description of the track, key, BPM, or tools used.]</p>
-      
+      <p id="song-display-desc">[Short description of track]</p>
       <audio id="main-audio-player" controls>
         <source id="audio-source" src="" type="audio/mpeg">
-        Your browser does not support the audio element.
       </audio>
     </section>
 
-    <!-- GAME DEVLOG SECTION -->
     <section id="game-news">
       <h2>Game Development News</h2>
       <h3>Devlog Update: [Insert Update Title]</h3>
-      <p>[WRITE YOUR GAME NEWS HERE: Detail your latest features, mechanics, or milestones.]</p>
-      
+      <p>[WRITE YOUR GAME NEWS HERE]</p>
       <div>
         <p><strong>Screenshots:</strong></p>
-        <img id="game-img-preview" src="screenshot.png" alt="Game Screenshot Preview">
+        <img id="game-img-preview" src="screenshot.png" alt="Preview">
       </div>
-
       <div>
         <p><strong>Gameplay Preview:</strong></p>
         <video id="game-video-preview" controls>
           <source id="video-source" src="gameplay.mp4" type="video/mp4">
-          Your browser does not support the video element.
         </video>
       </div>
     </section>
 
-    <!-- LOCAL PUBLIC ASK BOX -->
     <section id="ask-me">
       <h2>Ask Me Anything</h2>
       <form id="ask-form">
@@ -210,119 +200,171 @@
         <input type="text" id="ask-name" placeholder="ANONYMOUS">
         
         <label for="ask-question">Your Question:</label>
-        <textarea id="ask-question" rows="3" required placeholder="Ask me about my music, games, or projects..."></textarea>
+        <textarea id="ask-question" rows="3" required placeholder="Ask me about my music, games..."></textarea>
         
-        <button type="button" onclick="showGuidelines('ask')">Submit Question</button>
+        <button type="button" onclick="submitQuestion()">Submit Question</button>
       </form>
 
-      <!-- PUBLIC QUESTIONS AND ANSWERS DISPLAY -->
       <h3 style="margin-top: 2rem;">Public Questions & Answers</h3>
-      <div id="qa-list">
-        <!-- Live questions load here -->
-      </div>
+      <div id="qa-list"></div>
     </section>
   </main>
 
-  <!-- POSTING GUIDELINES MODAL -->
-  <div id="guidelines-modal" class="modal">
+  <footer>
+    <button id="auth-btn" style="width: auto; padding: 0.4rem 0.8rem;" onclick="openLoginModal()">Creator Login</button>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeGuidelines()">&times;</span>
-      <h3>Posting Guidelines</h3>
-      <ul>
-        <li>Be respectful and constructive in questions and comments.</li>
-        <li>No spam, self-promotion, or illegal content.</li>
-        <li>Ensure uploaded files are in .png, .jpeg, .mp3, .ogg, .wav, or .mp4 format.</li>
-      </ul>
-      <button onclick="confirmSubmission()">I Agree & Submit</button>
+      <span class="close-btn" onclick="closeLoginModal()">&times;</span>
+      <h3>Admin Authentication</h3>
+      <input type="email" id="login-email" placeholder="Admin Email" required>
+      <input type="password" id="login-password" placeholder="Password" required>
+      <button onclick="handleLogin()">Sign In</button>
     </div>
   </div>
-  
-  <!-- Supabase Library Initialization -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const SUPABASE_URL = 'https://egakbksyaovurbmwvopg.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYWtia3N5YW92dXJibXd2b3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDIzMTEsImV4cCI6MjEwMTUxODMxMX0.GwlI2PX26HjBtCm4H9YR5j6P5T9nsEJGaqqnC6xyoNc';
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    let activeAction = '';
+    let currentUser = null;
 
-    function showGuidelines(actionType) {
-      activeAction = actionType;
-      document.getElementById('guidelines-modal').style.display = 'block';
+    // Check active session on startup
+    async function initAuth() {
+      const { data: { session } } = await _supabase.auth.getSession();
+      currentUser = session ? session.user : null;
+      updateUI();
+
+      _supabase.auth.onAuthStateChange((_event, session) => {
+        currentUser = session ? session.user : null;
+        updateUI();
+      });
     }
 
-    function closeGuidelines() {
-      document.getElementById('guidelines-modal').style.display = 'none';
+    function updateUI() {
+      const adminElements = document.querySelectorAll('.admin-only');
+      adminElements.forEach(el => {
+        el.style.display = currentUser ? 'block' : 'none';
+      });
+
+      const authBtn = document.getElementById('auth-btn');
+      authBtn.innerText = currentUser ? 'Log Out' : 'Creator Login';
+      authBtn.onclick = currentUser ? handleLogout : openLoginModal;
+
+      fetchQuestions();
     }
 
-    async function confirmSubmission() {
-      closeGuidelines();
+    function openLoginModal() {
+      document.getElementById('login-modal').style.display = 'block';
+    }
 
-      if (activeAction === 'ask') {
-        const nameInput = document.getElementById('ask-name').value.trim();
-        const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
-        const question = document.getElementById('ask-question').value;
+    function closeLoginModal() {
+      document.getElementById('login-modal').style.display = 'none';
+    }
 
-        if (!question) return;
+    async function handleLogin() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
 
-        const { error } = await _supabase
-          .from('questions')
-          .insert([{ name: name, question: question }]);
+      const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
 
-        if (error) {
-          alert('Error submitting question: ' + error.message);
-        } else {
-          alert('Question submitted successfully!');
-          fetchQuestions();
-        }
-      } 
-      else if (activeAction === 'upload') {
-        const fileInput = document.getElementById('file-upload').files[0];
-        const title = document.getElementById('post-title').value;
-        const desc = document.getElementById('post-desc').value;
-
-        if (!fileInput) {
-          alert('Please select a file first.');
-          return;
-        }
-
-        const filePath = `uploads/${Date.now()}_${fileInput.name}`;
-        
-        // Upload file to Supabase Storage
-        const { data, error } = await _supabase.storage
-          .from('media')
-          .upload(filePath, fileInput);
-
-        if (error) {
-          alert('Upload failed: ' + error.message + '\nCheck if your bucket is public and allows uploads.');
-        } else {
-          const publicUrl = _supabase.storage.from('media').getPublicUrl(filePath).data.publicUrl;
-          
-          // Check file type to assign to correct player
-          const ext = fileInput.name.split('.').pop().toLowerCase();
-          
-          if (['mp3', 'wav', 'ogg'].includes(ext)) {
-            const player = document.getElementById('main-audio-player');
-            const source = document.getElementById('audio-source');
-            source.src = publicUrl;
-            player.load();
-            if (title) document.getElementById('song-display-title').innerText = title;
-            if (desc) document.getElementById('song-display-desc').innerText = desc;
-          } else if (['png', 'jpg', 'jpeg'].includes(ext)) {
-            document.getElementById('game-img-preview').src = publicUrl;
-          } else if (ext === 'mp4') {
-            const video = document.getElementById('game-video-preview');
-            const source = document.getElementById('video-source');
-            source.src = publicUrl;
-            video.load();
-          }
-
-          alert('File uploaded successfully! Updated on page.');
-        }
+      if (error) {
+        alert('Login failed: ' + error.message);
+      } else {
+        closeLoginModal();
+        alert('Welcome back, Arctic452910!');
       }
     }
 
-    // Function to load questions from database
+    async function handleLogout() {
+      await _supabase.auth.signOut();
+      alert('Logged out.');
+    }
+
+    async function submitQuestion() {
+      const nameInput = document.getElementById('ask-name').value.trim();
+      const name = nameInput === '' ? 'ANONYMOUS' : nameInput;
+      const question = document.getElementById('ask-question').value;
+
+      if (!question) {
+        alert('Please write a question.');
+        return;
+      }
+
+      const { error } = await _supabase.from('questions').insert([{ name, question }]);
+
+      if (error) {
+        alert('Error: ' + error.message);
+      } else {
+        alert('Question submitted!');
+        document.getElementById('ask-form').reset();
+        fetchQuestions();
+      }
+    }
+
+    async function uploadMedia() {
+      if (!currentUser) return;
+
+      const fileInput = document.getElementById('file-upload').files[0];
+      const title = document.getElementById('post-title').value;
+      const desc = document.getElementById('post-desc').value;
+
+      if (!fileInput) {
+        alert('Select a file.');
+        return;
+      }
+
+      const filePath = `uploads/${Date.now()}_${fileInput.name}`;
+      const { data, error } = await _supabase.storage.from('media').upload(filePath, fileInput);
+
+      if (error) {
+        alert('Upload failed: ' + error.message);
+      } else {
+        const publicUrl = _supabase.storage.from('media').getPublicUrl(filePath).data.publicUrl;
+        const ext = fileInput.name.split('.').pop().toLowerCase();
+
+        if (['mp3', 'wav', 'ogg'].includes(ext)) {
+          const player = document.getElementById('main-audio-player');
+          document.getElementById('audio-source').src = publicUrl;
+          player.load();
+          if (title) document.getElementById('song-display-title').innerText = title;
+          if (desc) document.getElementById('song-display-desc').innerText = desc;
+        } else if (['png', 'jpg', 'jpeg'].includes(ext)) {
+          document.getElementById('game-img-preview').src = publicUrl;
+        } else if (ext === 'mp4') {
+          const video = document.getElementById('game-video-preview');
+          document.getElementById('video-source').src = publicUrl;
+          video.load();
+        }
+
+        alert('Upload successful!');
+        document.getElementById('upload-form').reset();
+      }
+    }
+
+    async function submitAnswer(questionId) {
+      if (!currentUser) return;
+
+      const answerText = document.getElementById(`answer-input-${questionId}`).value;
+      if (!answerText) return;
+
+      const { error } = await _supabase
+        .from('questions')
+        .update({ answer: answerText })
+        .eq('id', questionId);
+
+      if (error) {
+        alert('Error saving answer: ' + error.message);
+      } else {
+        alert('Answer published!');
+        fetchQuestions();
+      }
+    }
+
     async function fetchQuestions() {
       const { data, error } = await _supabase
         .from('questions')
@@ -334,23 +376,35 @@
       const qaList = document.getElementById('qa-list');
       qaList.innerHTML = '';
 
-      data.forEach(q => {
-        const card = document.createElement('div');
-        card.className = 'qa-card';
-        card.innerHTML = `
-          <p class="qa-author">Submitted by: ${q.name || 'ANONYMOUS'}</p>
-          <p><strong>Q:</strong> ${q.question}</p>
-          <div class="qa-answer">
-            <p><strong>Arctic452910:</strong> ${q.answer || '<em>(Awaiting response)</em>'}</p>
-          </div>
-        `;
-        qaList.appendChild(card);
-      });
+      if (data) {
+        data.forEach(q => {
+          const card = document.createElement('div');
+          card.className = 'qa-card';
+
+          let adminReplyBox = '';
+          if (currentUser) {
+            adminReplyBox = `
+              <div class="admin-reply-box">
+                <textarea id="answer-input-${q.id}" placeholder="Type response...">${q.answer || ''}</textarea>
+                <button style="margin-top:0.4rem;" onclick="submitAnswer(${q.id})">Save Answer</button>
+              </div>
+            `;
+          }
+
+          card.innerHTML = `
+            <p class="qa-author">Submitted by: ${q.name || 'ANONYMOUS'}</p>
+            <p><strong>Q:</strong> ${q.question}</p>
+            <div class="qa-answer">
+              <p><strong>Arctic452910:</strong> ${q.answer || '<em>(Awaiting response)</em>'}</p>
+            </div>
+            ${adminReplyBox}
+          `;
+          qaList.appendChild(card);
+        });
+      }
     }
 
-    // Load existing questions when page opens
-    window.onload = fetchQuestions;
+    window.onload = initAuth;
   </script>
-
 </body>
 </html>
