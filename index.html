@@ -486,60 +486,94 @@
       alert('Profile updated!');
     }
 
-    async function uploadMedia() {
-      const fileInput = document.getElementById('file-upload').files[0];
-      const title = document.getElementById('post-title').value;
-      const desc = document.getElementById('post-desc').value;
-      const category = document.getElementById('post-category').value;
+// Load all posts from Supabase when the page loads
+async function fetchPosts() {
+  const { data: posts, error } = await _supabase
+    .from('posts')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-      if (!title && !desc) {
-        alert('Please provide a title or content for your post.');
-        return;
-      }
+  if (error) {
+    console.error('Error fetching posts:', error);
+    return;
+  }
 
-      let publicUrl = '';
-      if (fileInput) {
-        const filePath = `uploads/${Date.now()}_${fileInput.name}`;
-        const { data, error } = await _supabase.storage.from('Media').upload(filePath, fileInput);
-
-        if (error) {
-          alert('Upload failed: ' + error.message);
-          return;
-        } else {
-          publicUrl = _supabase.storage.from('Media').getPublicUrl(filePath).data.publicUrl;
-          const ext = fileInput.name.split('.').pop().toLowerCase();
-
-          if (['mp3', 'wav', 'ogg'].includes(ext)) {
-            currentAudioPath = filePath;
-            document.getElementById('audio-source').src = publicUrl;
-            document.getElementById('main-audio-player').load();
-            if (title) document.getElementById('song-display-title').innerText = title;
-            if (desc) document.getElementById('song-display-desc').innerText = desc;
-          } else {
-            currentGamePath = filePath;
-            if (title) document.getElementById('game-display-title').innerText = title;
-            if (desc) document.getElementById('game-display-desc').innerText = desc;
-
-            if (['png', 'jpg', 'jpeg'].includes(ext)) {
-              const img = document.getElementById('game-img-preview');
-              img.src = publicUrl;
-              img.style.display = 'block';
-            } else if (ext === 'mp4') {
-              const vid = document.getElementById('game-video-preview');
-              document.getElementById('video-source').src = publicUrl;
-              vid.load();
-              vid.style.display = 'block';
-            }
-          }
-        }
-      } else {
-        if (title) document.getElementById('game-display-title').innerText = title;
-        if (desc) document.getElementById('game-display-desc').innerText = desc;
-      }
-
-      alert('Post published under ' + category.toUpperCase() + '!');
-      document.getElementById('upload-form').reset();
+  // Find latest music release
+  const latestMusic = posts.find(p => p.category === 'music' || (p.media_type && ['mp3','wav','ogg'].includes(p.media_type)));
+  if (latestMusic) {
+    document.getElementById('song-display-title').innerText = latestMusic.title || '[Untitled Track]';
+    document.getElementById('song-display-desc').innerText = latestMusic.content || '';
+    if (latestMusic.media_url) {
+      document.getElementById('audio-source').src = latestMusic.media_url;
+      document.getElementById('main-audio-player').load();
     }
+  }
+
+  // Find latest game dev post
+  const latestGame = posts.find(p => p.category === 'gamedev');
+  if (latestGame) {
+    document.getElementById('game-display-title').innerText = latestGame.title || '[Untitled Update]';
+    document.getElementById('game-display-desc').innerText = latestGame.content || '';
+    if (latestGame.media_url) {
+      if (['png', 'jpg', 'jpeg'].includes(latestGame.media_type)) {
+        const img = document.getElementById('game-img-preview');
+        img.src = latestGame.media_url;
+        img.style.display = 'block';
+      } else if (latestGame.media_type === 'mp4') {
+        const vid = document.getElementById('game-video-preview');
+        document.getElementById('video-source').src = latestGame.media_url;
+        vid.load();
+        vid.style.display = 'block';
+      }
+    }
+  }
+}
+
+// Updated upload function to save directly to Supabase table
+async function uploadMedia() {
+  const fileInput = document.getElementById('file-upload').files[0];
+  const title = document.getElementById('post-title').value;
+  const desc = document.getElementById('post-desc').value;
+  const category = document.getElementById('post-category').value;
+
+  if (!title && !desc) {
+    alert('Please provide a title or content for your post.');
+    return;
+  }
+
+  let publicUrl = '';
+  let ext = '';
+
+  if (fileInput) {
+    ext = fileInput.name.split('.').pop().toLowerCase();
+    const filePath = `uploads/${Date.now()}_${fileInput.name}`;
+    const { error: uploadError } = await _supabase.storage.from('Media').upload(filePath, fileInput);
+
+    if (uploadError) {
+      alert('Upload failed: ' + uploadError.message);
+      return;
+    }
+
+    publicUrl = _supabase.storage.from('Media').getPublicUrl(filePath).data.publicUrl;
+  }
+
+  // Insert post record into Supabase database
+  const { error: dbError } = await _supabase.from('posts').insert([{
+    title: title,
+    content: desc,
+    category: category,
+    media_url: publicUrl,
+    media_type: ext
+  }]);
+
+  if (dbError) {
+    alert('Database error: ' + dbError.message);
+  } else {
+    alert('Post published successfully!');
+    document.getElementById('upload-form').reset();
+    fetchPosts(); // Reload posts on page
+  }
+}
 
     async function deleteCurrentTrack() {
       if (!currentAudioPath) { alert('No track to delete.'); return; }
