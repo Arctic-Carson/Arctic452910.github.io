@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arctic452910 | Official Site</title>
   
-  <!-- ITEM 3: Browser Tab Favicon -->
   <link rel="icon" type="image/png" href="Arctic Logo.png">
 
   <style>
-    /* ITEM 6: Black background with green and pink glowing aurora gradients */
     body {
       margin: 0;
       padding: 0;
@@ -45,7 +43,6 @@
       gap: 1rem;
     }
 
-    /* ITEM 3: Header Logo Icon */
     .header-logo {
       width: 50px;
       height: 50px;
@@ -70,7 +67,6 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* ITEM 6: Classic Blue Shades Preserved for Titles and Buttons */
     h1, h2, h3 { color: #00d4ff; }
 
     img, video { max-width: 100%; border-radius: 8px; margin-top: 0.5rem; }
@@ -87,7 +83,6 @@
       color: #fff;
     }
 
-    /* ITEM 6: Preserved Blue Buttons */
     button, .btn {
       background-color: #00d4ff;
       color: #000000;
@@ -116,7 +111,6 @@
       box-shadow: 0 0 12px rgba(255, 51, 102, 0.6) !important;
     }
 
-    /* ITEM 2: Filter Category Navigation Bar */
     .category-bar {
       display: flex;
       gap: 0.5rem;
@@ -218,7 +212,6 @@
 <body>
 
   <header>
-    <!-- ITEM 3: Header Icon -->
     <img src="Arctic Logo.png" alt="Arctic Logo" class="header-logo" onerror="this.style.display='none'">
     <div>
       <h1 style="margin: 0;">Arctic452910</h1>
@@ -227,7 +220,6 @@
   </header>
 
   <main>
-    <!-- ITEM 4: User Profile Customization Section (Logged in users) -->
     <section id="user-profile-section" style="display: none;">
       <h2>User Profile</h2>
       <div class="profile-card">
@@ -255,26 +247,25 @@
       </p>
     </section>
 
-    <!-- CREATOR UPLOAD DASHBOARD (Admin Only) -->
+    <!-- CREATOR POST & UPLOAD DASHBOARD (Only visible when logged in as Creator) -->
     <section id="admin-upload" class="admin-only">
-      <h2>Creator Dashboard</h2>
+      <h2>Create New Post</h2>
       <form id="upload-form">
         <label for="post-title">Post Title:</label>
-        <input type="text" id="post-title" placeholder="Title of track or update..." required>
+        <input type="text" id="post-title" placeholder="Title of track, devlog update, or news..." required>
 
-        <label for="post-desc">Description:</label>
-        <textarea id="post-desc" rows="3" placeholder="Details..."></textarea>
+        <label for="post-desc">Post Content / Description:</label>
+        <textarea id="post-desc" rows="4" placeholder="Write your post text here..."></textarea>
 
-        <!-- ITEM 2: Target Subpage Selection -->
-        <label for="post-category">Category / Subpage:</label>
+        <label for="post-category">Target Subpage / Category:</label>
         <select id="post-category">
-          <option value="music">Music Archive</option>
           <option value="gamedev">Game Development</option>
+          <option value="music">Music Archive</option>
           <option value="other">Other</option>
         </select>
 
-        <label for="file-upload">Attach File (.png, .jpeg, .mp3, .ogg, .wav, .mp4):</label>
-        <input type="file" id="file-upload" accept=".png, .jpeg, .jpg, .mp3, .ogg, .wav, .mp4" required>
+        <label for="file-upload">Attach File (Optional: .png, .jpeg, .mp3, .ogg, .wav, .mp4):</label>
+        <input type="file" id="file-upload" accept=".png, .jpeg, .jpg, .mp3, .ogg, .wav, .mp4">
 
         <button type="button" onclick="uploadMedia()">Publish Post</button>
       </form>
@@ -288,7 +279,6 @@
       <audio id="main-audio-player" controls>
         <source id="audio-source" src="" type="audio/mpeg">
       </audio>
-      <!-- ITEM 1: Delete Post Button (Creator Only) -->
       <button id="delete-song-btn" class="delete-btn admin-only" onclick="deleteCurrentTrack()">Delete Latest Release</button>
     </section>
 
@@ -303,18 +293,17 @@
           <source id="video-source" src="" type="video/mp4">
         </video>
       </div>
-      <!-- ITEM 1: Delete Post Button (Creator Only) -->
       <button id="delete-game-btn" class="delete-btn admin-only" onclick="deleteCurrentGamePost()">Delete Game Dev Post</button>
     </section>
 
-    <!-- ITEM 2: Category Filter Subpages -->
+    <!-- CATEGORY ARCHIVES SECTION -->
     <section id="subpages-section">
       <h2>Archives & Categories</h2>
       <p><small>Filter posts by topic:</small></p>
       <div class="category-bar">
         <button class="category-btn active" onclick="filterCategory('all', this)">All</button>
-        <button class="category-btn" onclick="filterCategory('music', this)">Music Archive</button>
         <button class="category-btn" onclick="filterCategory('gamedev', this)">Game Development</button>
+        <button class="category-btn" onclick="filterCategory('music', this)">Music Archive</button>
         <button class="category-btn" onclick="filterCategory('other', this)">Other</button>
       </div>
 
@@ -340,7 +329,7 @@
       <div id="qa-list"></div>
     </section>
 
-    <!-- ITEM 5: Rules & Guidelines Section -->
+    <!-- RULES & GUIDELINES -->
     <section id="rules-section">
       <h2>Rules & Guidelines</h2>
       <div id="rules-body">
@@ -355,7 +344,6 @@
     </section>
   </main>
 
-  <!-- ITEM 4: Dynamic Single Sign Out / Multi-Login Footer Navigation -->
   <footer>
     <div id="guest-auth-buttons">
       <button onclick="openModal('user-auth-modal')">Login / Sign Up</button>
@@ -366,7 +354,7 @@
     </div>
   </footer>
 
-  <!-- USER LOGIN / SIGNUP MODAL (ITEM 4) -->
+  <!-- USER LOGIN / SIGNUP MODAL -->
   <div id="user-auth-modal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal('user-auth-modal')">&times;</span>
@@ -395,7 +383,8 @@
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnYWtia3N5YW92dXJibXd2b3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NDIzMTEsImV4cCI6MjEwMTUxODMxMX0.GwlI2PX26HjBtCm4H9YR5j6P5T9nsEJGaqqnC6xyoNc';
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Update with your actual Creator account UID if restrict policies are used
+    const CREATOR_ID = '356c2e6a-a16c-4f08-919b-9ad2bf447b2b';
+
     let currentUser = null;
     let isCreator = false;
 
@@ -405,16 +394,25 @@
     async function initAuth() {
       const { data: { session } } = await _supabase.auth.getSession();
       currentUser = session ? session.user : null;
+      checkCreatorStatus();
       updateUI();
 
       _supabase.auth.onAuthStateChange((_event, session) => {
         currentUser = session ? session.user : null;
+        checkCreatorStatus();
         updateUI();
       });
     }
 
+    function checkCreatorStatus() {
+      if (currentUser && currentUser.id === CREATOR_ID) {
+        isCreator = true;
+      } else {
+        isCreator = false;
+      }
+    }
+
     function updateUI() {
-      // Check if user is logged in
       const guestBtns = document.getElementById('guest-auth-buttons');
       const userBtns = document.getElementById('user-auth-buttons');
       const profileSec = document.getElementById('user-profile-section');
@@ -430,7 +428,6 @@
         profileSec.style.display = 'none';
       }
 
-      // Check Creator privileges (by metadata or email check)
       const adminElements = document.querySelectorAll('.admin-only');
       adminElements.forEach(el => {
         el.style.display = (currentUser && isCreator) ? 'block' : 'none';
@@ -442,7 +439,6 @@
     function openModal(id) { document.getElementById(id).style.display = 'block'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // ITEM 4: Public Login / Sign Up
     async function handleUserAuth(isSignUp) {
       const email = document.getElementById('user-email').value;
       const password = document.getElementById('user-password').value;
@@ -454,13 +450,11 @@
       if (result.error) {
         alert('Authentication error: ' + result.error.message);
       } else {
-        isCreator = false;
         closeModal('user-auth-modal');
         alert(isSignUp ? 'Account created and logged in!' : 'Logged in successfully!');
       }
     }
 
-    // Creator Specific Login
     async function handleCreatorLogin() {
       const email = document.getElementById('creator-email').value;
       const password = document.getElementById('creator-password').value;
@@ -470,7 +464,6 @@
       if (error) {
         alert('Creator login failed: ' + error.message);
       } else {
-        isCreator = true;
         closeModal('creator-login-modal');
         alert('Welcome back, Creator!');
         updateUI();
@@ -483,7 +476,6 @@
       alert('Logged out.');
     }
 
-    // ITEM 4: Profile customization
     function saveUserProfile() {
       const bio = document.getElementById('edit-bio').value;
       const avatarUrl = document.getElementById('edit-avatar-url').value;
@@ -491,58 +483,66 @@
       if (bio) document.getElementById('user-display-bio').innerText = bio;
       if (avatarUrl) document.getElementById('user-avatar-display').src = avatarUrl;
 
-      alert('Profile updated locally!');
+      alert('Profile updated!');
     }
 
-    // ITEM 2: Publish with categories
     async function uploadMedia() {
       const fileInput = document.getElementById('file-upload').files[0];
       const title = document.getElementById('post-title').value;
       const desc = document.getElementById('post-desc').value;
       const category = document.getElementById('post-category').value;
 
-      if (!fileInput) { alert('Select a file.'); return; }
+      if (!title && !desc) {
+        alert('Please provide a title or content for your post.');
+        return;
+      }
 
-      const filePath = `uploads/${Date.now()}_${fileInput.name}`;
-      const { data, error } = await _supabase.storage.from('Media').upload(filePath, fileInput);
+      let publicUrl = '';
+      if (fileInput) {
+        const filePath = `uploads/${Date.now()}_${fileInput.name}`;
+        const { data, error } = await _supabase.storage.from('Media').upload(filePath, fileInput);
 
-      if (error) {
-        alert('Upload failed: ' + error.message);
-      } else {
-        const publicUrl = _supabase.storage.from('Media').getPublicUrl(filePath).data.publicUrl;
-        const ext = fileInput.name.split('.').pop().toLowerCase();
-
-        if (['mp3', 'wav', 'ogg'].includes(ext)) {
-          currentAudioPath = filePath;
-          document.getElementById('audio-source').src = publicUrl;
-          document.getElementById('main-audio-player').load();
-          if (title) document.getElementById('song-display-title').innerText = title;
-          if (desc) document.getElementById('song-display-desc').innerText = desc;
+        if (error) {
+          alert('Upload failed: ' + error.message);
+          return;
         } else {
-          currentGamePath = filePath;
-          if (title) document.getElementById('game-display-title').innerText = title;
-          if (desc) document.getElementById('game-display-desc').innerText = desc;
+          publicUrl = _supabase.storage.from('Media').getPublicUrl(filePath).data.publicUrl;
+          const ext = fileInput.name.split('.').pop().toLowerCase();
 
-          if (['png', 'jpg', 'jpeg'].includes(ext)) {
-            const img = document.getElementById('game-img-preview');
-            img.src = publicUrl;
-            img.style.display = 'block';
-          } else if (ext === 'mp4') {
-            const vid = document.getElementById('game-video-preview');
-            document.getElementById('video-source').src = publicUrl;
-            vid.load();
-            vid.style.display = 'block';
+          if (['mp3', 'wav', 'ogg'].includes(ext)) {
+            currentAudioPath = filePath;
+            document.getElementById('audio-source').src = publicUrl;
+            document.getElementById('main-audio-player').load();
+            if (title) document.getElementById('song-display-title').innerText = title;
+            if (desc) document.getElementById('song-display-desc').innerText = desc;
+          } else {
+            currentGamePath = filePath;
+            if (title) document.getElementById('game-display-title').innerText = title;
+            if (desc) document.getElementById('game-display-desc').innerText = desc;
+
+            if (['png', 'jpg', 'jpeg'].includes(ext)) {
+              const img = document.getElementById('game-img-preview');
+              img.src = publicUrl;
+              img.style.display = 'block';
+            } else if (ext === 'mp4') {
+              const vid = document.getElementById('game-video-preview');
+              document.getElementById('video-source').src = publicUrl;
+              vid.load();
+              vid.style.display = 'block';
+            }
           }
         }
-
-        alert('Post published under ' + category.toUpperCase() + '!');
-        document.getElementById('upload-form').reset();
+      } else {
+        if (title) document.getElementById('game-display-title').innerText = title;
+        if (desc) document.getElementById('game-display-desc').innerText = desc;
       }
+
+      alert('Post published under ' + category.toUpperCase() + '!');
+      document.getElementById('upload-form').reset();
     }
 
-    // ITEM 1: Delete Post Functions
     async function deleteCurrentTrack() {
-      if (!currentAudioPath) { alert('No uploaded track path found to delete.'); return; }
+      if (!currentAudioPath) { alert('No track to delete.'); return; }
       
       const { error } = await _supabase.storage.from('Media').remove([currentAudioPath]);
       if (error) {
@@ -558,7 +558,7 @@
     }
 
     async function deleteCurrentGamePost() {
-      if (!currentGamePath) { alert('No uploaded game media path found to delete.'); return; }
+      if (!currentGamePath) { alert('No game media to delete.'); return; }
       
       const { error } = await _supabase.storage.from('Media').remove([currentGamePath]);
       if (error) {
@@ -573,7 +573,6 @@
       }
     }
 
-    // ITEM 2: Category Filter Functionality
     function filterCategory(cat, btn) {
       const buttons = document.querySelectorAll('.category-btn');
       buttons.forEach(b => b.classList.remove('active'));
